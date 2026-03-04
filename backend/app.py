@@ -13,6 +13,7 @@ import subprocess
 import tempfile
 import threading
 from pathlib import Path
+from security_utils import is_production_mode, is_strong_secret, is_strong_drawer_pass
 
 try:
     from PIL import Image
@@ -160,31 +161,6 @@ def extract_memo_from_file(file_path):
         print(f"提取 memo 失败: {e}")
         return "「昨日记录加载失败」\n\n「往者不可谏，来者犹可追。」"
 
-def _is_production_mode() -> bool:
-    env = (os.getenv("STAR_OFFICE_ENV") or os.getenv("FLASK_ENV") or "").strip().lower()
-    return env in {"prod", "production"}
-
-
-def _is_strong_secret(secret: str) -> bool:
-    if not secret:
-        return False
-    secret = secret.strip()
-    if len(secret) < 24:
-        return False
-    weak_markers = {"change-me", "dev", "example", "test", "default"}
-    low = secret.lower()
-    return not any(m in low for m in weak_markers)
-
-
-def _is_strong_drawer_pass(pwd: str) -> bool:
-    if not pwd:
-        return False
-    pwd = pwd.strip()
-    if pwd == "1234":
-        return False
-    return len(pwd) >= 8
-
-
 app = Flask(__name__, static_folder=FRONTEND_DIR, static_url_path="/static")
 app.secret_key = os.getenv("FLASK_SECRET_KEY") or os.getenv("STAR_OFFICE_SECRET") or "star-office-dev-secret-change-me"
 
@@ -192,7 +168,7 @@ app.secret_key = os.getenv("FLASK_SECRET_KEY") or os.getenv("STAR_OFFICE_SECRET"
 app.config.update(
     SESSION_COOKIE_HTTPONLY=True,
     SESSION_COOKIE_SAMESITE="Lax",
-    SESSION_COOKIE_SECURE=_is_production_mode(),
+    SESSION_COOKIE_SECURE=is_production_mode(),
     PERMANENT_SESSION_LIFETIME=timedelta(hours=12),
 )
 
@@ -203,11 +179,11 @@ join_lock = threading.Lock()
 VERSION_TIMESTAMP = datetime.now().strftime("%Y%m%d_%H%M%S")
 ASSET_DRAWER_PASS_DEFAULT = os.getenv("ASSET_DRAWER_PASS", "1234")
 
-if _is_production_mode():
+if is_production_mode():
     hardening_errors = []
-    if not _is_strong_secret(str(app.secret_key)):
+    if not is_strong_secret(str(app.secret_key)):
         hardening_errors.append("FLASK_SECRET_KEY / STAR_OFFICE_SECRET is weak (need >=24 chars, non-default)")
-    if not _is_strong_drawer_pass(ASSET_DRAWER_PASS_DEFAULT):
+    if not is_strong_drawer_pass(ASSET_DRAWER_PASS_DEFAULT):
         hardening_errors.append("ASSET_DRAWER_PASS is weak (do not use default 1234; recommend >=8 chars)")
     if hardening_errors:
         raise RuntimeError("Security hardening check failed in production mode: " + "; ".join(hardening_errors))
@@ -1991,15 +1967,15 @@ if __name__ == "__main__":
     print("=" * 50)
     print(f"State file: {STATE_FILE}")
     print("Listening on: http://0.0.0.0:18791")
-    mode = "production" if _is_production_mode() else "development"
+    mode = "production" if is_production_mode() else "development"
     print(f"Mode: {mode}")
-    if _is_production_mode():
+    if is_production_mode():
         print("Security hardening: ENABLED (strict checks)")
     else:
         weak_flags = []
-        if not _is_strong_secret(str(app.secret_key)):
+        if not is_strong_secret(str(app.secret_key)):
             weak_flags.append("weak FLASK_SECRET_KEY/STAR_OFFICE_SECRET")
-        if not _is_strong_drawer_pass(ASSET_DRAWER_PASS_DEFAULT):
+        if not is_strong_drawer_pass(ASSET_DRAWER_PASS_DEFAULT):
             weak_flags.append("weak ASSET_DRAWER_PASS")
         if weak_flags:
             print("Security hardening: WARNING (dev mode) -> " + ", ".join(weak_flags))
