@@ -66,11 +66,11 @@ async function loadMemo() {
       memoDate.textContent = data.date || '';
       memoContent.innerHTML = data.memo.replace(/\n/g, '<br>');
     } else {
-      memoContent.innerHTML = '<div id="memo-placeholder">暂无昨日日记</div>';
+      memoContent.innerHTML = '<div id="memo-placeholder">No notes from yesterday</div>';
     }
   } catch (e) {
-    console.error('加载 memo 失败:', e);
-    memoContent.innerHTML = '<div id="memo-placeholder">加载失败</div>';
+    console.error('Failed to load memo:', e);
+    memoContent.innerHTML = '<div id="memo-placeholder">Failed to load</div>';
   }
 }
 
@@ -82,7 +82,7 @@ function updateLoadingProgress() {
     loadingProgressBar.style.width = percent + '%';
   }
   if (loadingText) {
-    loadingText.textContent = `正在加载 Star 的像素办公室... ${percent}%`;
+    loadingText.textContent = `Loading Dangercorn HQ... ${percent}%`;
   }
 }
 
@@ -100,90 +100,90 @@ function hideLoadingOverlay() {
 }
 
 const STATES = {
-  idle: { name: '待命', area: 'breakroom' },
-  writing: { name: '整理文档', area: 'writing' },
-  researching: { name: '搜索信息', area: 'researching' },
-  executing: { name: '执行任务', area: 'writing' },
-  syncing: { name: '同步备份', area: 'writing' },
-  error: { name: '出错了', area: 'error' }
+  idle: { name: 'Idle', area: 'breakroom' },
+  writing: { name: 'Working', area: 'writing' },
+  researching: { name: 'Researching', area: 'researching' },
+  executing: { name: 'Executing', area: 'writing' },
+  syncing: { name: 'Syncing', area: 'writing' },
+  error: { name: 'Alert', area: 'error' }
 };
 
 const BUBBLE_TEXTS = {
   idle: [
-    '待命中：耳朵竖起来了',
-    '我在这儿，随时可以开工',
-    '先把桌面收拾干净再说',
-    '呼——给大脑放个风',
-    '今天也要优雅地高效',
-    '等待，是为了更准确的一击',
-    '咖啡还热，灵感也还在',
-    '我在后台给你加 Buff',
-    '状态：静心 / 充电',
-    '小猫说：慢一点也没关系'
+    'Standing by... signal clear.',
+    'Ready when you are, Tim.',
+    'Monitoring all channels.',
+    'Quiet waters. Deep thinking.',
+    'Idle but listening.',
+    'Coffee is hot, synapses are warm.',
+    'Waiting is just thinking with patience.',
+    'All systems nominal.',
+    'The calm before the build.',
+    'Light through water... present.'
   ],
   writing: [
-    '进入专注模式：勿扰',
-    '先把关键路径跑通',
-    '我来把复杂变简单',
-    '把 bug 关进笼子里',
-    '写到一半，先保存',
-    '把每一步都做成可回滚',
-    '今天的进度，明天的底气',
-    '先收敛，再发散',
-    '让系统变得更可解释',
-    '稳住，我们能赢'
+    'Focus mode: do not disturb.',
+    'Running the critical path first.',
+    'Making the complex simple.',
+    'Caging the bugs, one by one.',
+    'Save early, save often.',
+    'Every step is rollbackable.',
+    'Today\'s progress is tomorrow\'s foundation.',
+    'Converge first, then expand.',
+    'Making the system more explainable.',
+    'Hold steady. We can win this.'
   ],
   researching: [
-    '我在挖证据链',
-    '让我把信息熬成结论',
-    '找到了：关键在这里',
-    '先把变量控制住',
-    '我在查：它为什么会这样',
-    '把直觉写成验证',
-    '先定位，再优化',
-    '别急，先画因果图'
+    'Digging through the evidence chain.',
+    'Distilling information into conclusions.',
+    'Found it: the key is right here.',
+    'Controlling the variables first.',
+    'Investigating: why does it behave this way?',
+    'Turning intuition into verification.',
+    'Locate first, optimize second.',
+    'Drawing the causal graph...'
   ],
   executing: [
-    '执行中：不要眨眼',
-    '把任务切成小块逐个击破',
-    '开始跑 pipeline',
-    '一键推进：走你',
-    '让结果自己说话',
-    '先做最小可行，再做最美版本'
+    'Executing: don\'t blink.',
+    'Breaking tasks into small wins.',
+    'Running the pipeline.',
+    'One-click deploy: here we go.',
+    'Let the results speak.',
+    'MVP first, then the masterpiece.'
   ],
   syncing: [
-    '同步中：把今天锁进云里',
-    '备份不是仪式，是安全感',
-    '写入中…别断电',
-    '把变更交给时间戳',
-    '云端对齐：咔哒',
-    '同步完成前先别乱动',
-    '把未来的自己从灾难里救出来',
-    '多一份备份，少一份后悔'
+    'Syncing: locking today into the cloud.',
+    'Backup isn\'t ritual, it\'s insurance.',
+    'Writing... don\'t pull the plug.',
+    'Handing changes to the timestamp.',
+    'Cloud aligned: click.',
+    'Don\'t touch anything until sync completes.',
+    'Saving future-you from disaster.',
+    'One more backup, one less regret.'
   ],
   error: [
-    '警报响了：先别慌',
-    '我闻到 bug 的味道了',
-    '先复现，再谈修复',
-    '把日志给我，我会说人话',
-    '错误不是敌人，是线索',
-    '把影响面圈起来',
-    '先止血，再手术',
-    '我在：马上定位根因',
-    '别怕，这种我见多了',
-    '报警中：让问题自己现形'
+    'Alert fired: stay calm.',
+    'I smell a bug.',
+    'Reproduce first, then fix.',
+    'Give me the logs, I\'ll translate.',
+    'Errors aren\'t enemies, they\'re clues.',
+    'Containing the blast radius.',
+    'Stop the bleeding, then operate.',
+    'On it: tracing root cause now.',
+    'Don\'t worry, I\'ve seen this before.',
+    'Alert mode: let the problem reveal itself.'
   ],
   cat: [
-    '喵~',
-    '咕噜咕噜…',
-    '尾巴摇一摇',
-    '晒太阳最开心',
-    '有人来看我啦',
-    '我是这个办公室的吉祥物',
-    '伸个懒腰',
-    '今天的罐罐准备好了吗',
-    '呼噜呼噜',
-    '这个位置视野最好'
+    'Meow~',
+    'Purrrr...',
+    'Tail wag!',
+    'Sunbeam naps are the best.',
+    'Oh, a visitor!',
+    'I am the office mascot.',
+    'Big stretch...',
+    'Are the treats ready?',
+    'Purr purr purr...',
+    'Best seat in the house.'
   ]
 };
 
@@ -281,77 +281,109 @@ function preload() {
     updateLoadingProgress();
   });
 
+  // Handle missing files gracefully — count them as loaded so progress completes
+  this.load.on('loaderror', (file) => {
+    console.warn('Asset not found (skipped):', file.key, file.url);
+    updateLoadingProgress();
+  });
+
   this.load.on('complete', () => {
     hideLoadingOverlay();
   });
 
-  this.load.image('office_bg', '/static/office_bg_small' + (supportsWebP ? '.webp' : '.png') + '?v={{VERSION_TIMESTAMP}}');
-  this.load.spritesheet('star_idle', '/static/star-idle-spritesheet' + getExt('star-idle-spritesheet.png'), { frameWidth: 128, frameHeight: 128 });
-  this.load.spritesheet('star_researching', '/static/star-researching-spritesheet' + getExt('star-researching-spritesheet.png'), { frameWidth: 128, frameHeight: 105 });
+  // === Assets that exist in repo ===
+  this.load.image('office_bg', '/static/office_bg_small.webp?v={{VERSION_TIMESTAMP}}');
+  this.load.spritesheet('plants', '/static/plants-spritesheet.webp', { frameWidth: 160, frameHeight: 160 });
+  this.load.spritesheet('posters', '/static/posters-spritesheet.webp', { frameWidth: 160, frameHeight: 160 });
+  this.load.spritesheet('serverroom', '/static/serverroom-spritesheet.webp', { frameWidth: 180, frameHeight: 251 });
+  this.load.spritesheet('error_bug', '/static/error-bug-spritesheet-grid.webp', { frameWidth: 180, frameHeight: 180 });
+  this.load.spritesheet('cats', '/static/cats-spritesheet.webp', { frameWidth: 160, frameHeight: 160 });
+  this.load.spritesheet('star_working', '/static/star-working-spritesheet-grid.webp', { frameWidth: 230, frameHeight: 144 });
+  this.load.image('memo_bg', '/static/memo-bg.webp');
 
-  this.load.image('sofa_idle', '/static/sofa-idle' + getExt('sofa-idle.png'));
-  this.load.spritesheet('sofa_busy', '/static/sofa-busy-spritesheet' + getExt('sofa-busy-spritesheet.png'), { frameWidth: 256, frameHeight: 256 });
-
-  this.load.spritesheet('plants', '/static/plants-spritesheet' + getExt('plants-spritesheet.png'), { frameWidth: 160, frameHeight: 160 });
-  this.load.spritesheet('posters', '/static/posters-spritesheet' + getExt('posters-spritesheet.png'), { frameWidth: 160, frameHeight: 160 });
-  this.load.spritesheet('coffee_machine', '/static/coffee-machine-spritesheet' + getExt('coffee-machine-spritesheet.png'), { frameWidth: 230, frameHeight: 230 });
-  this.load.spritesheet('serverroom', '/static/serverroom-spritesheet' + getExt('serverroom-spritesheet.png'), { frameWidth: 180, frameHeight: 251 });
-
-  this.load.spritesheet('error_bug', '/static/error-bug-spritesheet-grid' + (supportsWebP ? '.webp' : '.png'), { frameWidth: 180, frameHeight: 180 });
-  this.load.spritesheet('cats', '/static/cats-spritesheet' + (supportsWebP ? '.webp' : '.png'), { frameWidth: 160, frameHeight: 160 });
-  this.load.image('desk', '/static/desk' + getExt('desk.png'));
-  this.load.spritesheet('star_working', '/static/star-working-spritesheet-grid' + (supportsWebP ? '.webp' : '.png'), { frameWidth: 230, frameHeight: 144 });
-  this.load.spritesheet('sync_anim', '/static/sync-animation-spritesheet-grid' + (supportsWebP ? '.webp' : '.png'), { frameWidth: 256, frameHeight: 256 });
-  this.load.image('memo_bg', '/static/memo-bg' + (supportsWebP ? '.webp' : '.png'));
-
-  // 新办公桌：强制 PNG（透明）
+  // === Assets that may be missing (repo ships versioned names) — load with error tolerance ===
+  this.load.spritesheet('star_idle', '/static/star-idle-spritesheet.png', { frameWidth: 128, frameHeight: 128 });
+  this.load.spritesheet('star_researching', '/static/star-researching-spritesheet.png', { frameWidth: 128, frameHeight: 105 });
+  this.load.image('sofa_idle', '/static/sofa-idle.png');
+  this.load.spritesheet('sofa_busy', '/static/sofa-busy-spritesheet.webp', { frameWidth: 256, frameHeight: 256 });
+  this.load.spritesheet('coffee_machine', '/static/coffee-machine-spritesheet.webp', { frameWidth: 230, frameHeight: 230 });
+  this.load.image('desk', '/static/desk.webp');
+  this.load.spritesheet('sync_anim', '/static/sync-animation-spritesheet-grid.webp', { frameWidth: 256, frameHeight: 256 });
   this.load.image('desk_v2', '/static/desk-v2.png');
-  this.load.spritesheet('flowers', '/static/flowers-spritesheet' + (supportsWebP ? '.webp' : '.png'), { frameWidth: 65, frameHeight: 65 });
+  this.load.spritesheet('flowers', '/static/flowers-spritesheet.webp', { frameWidth: 65, frameHeight: 65 });
+
+  // === Dangercorn custom agent sprites ===
+  this.load.spritesheet('agent_calder', '/static/agents/calder-idle-spritesheet.png', { frameWidth: 128, frameHeight: 128 });
+  this.load.spritesheet('agent_johnny5', '/static/agents/johnny5-idle-spritesheet.png', { frameWidth: 128, frameHeight: 128 });
+  this.load.spritesheet('agent_hollywood', '/static/agents/hollywood-idle-spritesheet.png', { frameWidth: 128, frameHeight: 128 });
+  this.load.spritesheet('agent_njord', '/static/agents/njord-idle-spritesheet.png', { frameWidth: 128, frameHeight: 128 });
 }
 
 function create() {
   game = this;
   this.add.image(640, 360, 'office_bg');
 
-  // === 沙发（来自 LAYOUT）===
-  sofa = this.add.sprite(
-    LAYOUT.furniture.sofa.x,
-    LAYOUT.furniture.sofa.y,
-    'sofa_busy'
-  ).setOrigin(LAYOUT.furniture.sofa.origin.x, LAYOUT.furniture.sofa.origin.y);
-  sofa.setDepth(LAYOUT.furniture.sofa.depth);
+  // === Sofa (from LAYOUT) ===
+  if (game.textures.exists('sofa_busy')) {
+    sofa = this.add.sprite(
+      LAYOUT.furniture.sofa.x,
+      LAYOUT.furniture.sofa.y,
+      'sofa_busy'
+    ).setOrigin(LAYOUT.furniture.sofa.origin.x, LAYOUT.furniture.sofa.origin.y);
+    sofa.setDepth(LAYOUT.furniture.sofa.depth);
 
-  this.anims.create({
-    key: 'sofa_busy',
-    frames: this.anims.generateFrameNumbers('sofa_busy', { start: 0, end: 47 }),
-    frameRate: 12,
-    repeat: -1
-  });
+    this.anims.create({
+      key: 'sofa_busy',
+      frames: this.anims.generateFrameNumbers('sofa_busy', { start: 0, end: 47 }),
+      frameRate: 12,
+      repeat: -1
+    });
+  }
 
   areas = LAYOUT.areas;
 
-  this.anims.create({
-    key: 'star_idle',
-    frames: this.anims.generateFrameNumbers('star_idle', { start: 0, end: 29 }),
-    frameRate: 12,
-    repeat: -1
-  });
-  this.anims.create({
-    key: 'star_researching',
-    frames: this.anims.generateFrameNumbers('star_researching', { start: 0, end: 95 }),
-    frameRate: 12,
-    repeat: -1
-  });
+  if (game.textures.exists('star_idle')) {
+    this.anims.create({
+      key: 'star_idle',
+      frames: this.anims.generateFrameNumbers('star_idle', { start: 0, end: 29 }),
+      frameRate: 12,
+      repeat: -1
+    });
+  }
+  if (game.textures.exists('star_researching')) {
+    this.anims.create({
+      key: 'star_researching',
+      frames: this.anims.generateFrameNumbers('star_researching', { start: 0, end: 95 }),
+      frameRate: 12,
+      repeat: -1
+    });
+  }
 
-  star = game.physics.add.sprite(areas.breakroom.x, areas.breakroom.y, 'star_idle');
+  // === Dangercorn agent idle animations ===
+  var dangercornAgents = ['calder', 'johnny5', 'hollywood', 'njord'];
+  for (var di = 0; di < dangercornAgents.length; di++) {
+    var aKey = 'agent_' + dangercornAgents[di];
+    if (game.textures.exists(aKey)) {
+      this.anims.create({
+        key: aKey + '_idle',
+        frames: this.anims.generateFrameNumbers(aKey, { start: 0, end: 7 }),
+        frameRate: 6,
+        repeat: -1
+      });
+    }
+  }
+
+  // Use Calder sprite as main character instead of default lobster
+  var mainCharTexture = game.textures.exists('agent_calder') ? 'agent_calder' : 'star_idle';
+  star = game.physics.add.sprite(areas.breakroom.x, areas.breakroom.y, mainCharTexture);
   star.setOrigin(0.5);
-  star.setScale(1.4);
+  star.setScale(mainCharTexture === 'agent_calder' ? 0.8 : 1.4);
   star.setAlpha(0.95);
   star.setDepth(20);
   star.setVisible(false);
   star.anims.stop();
 
-  if (game.textures.exists('sofa_busy')) {
+  if (sofa && game.textures.exists('sofa_busy')) {
     sofa.setTexture('sofa_busy');
     sofa.anims.play('sofa_busy', true);
   }
@@ -361,7 +393,7 @@ function create() {
   const plaqueY = LAYOUT.plaque.y;
   const plaqueBg = game.add.rectangle(plaqueX, plaqueY, LAYOUT.plaque.width, LAYOUT.plaque.height, 0x5d4037);
   plaqueBg.setStrokeStyle(3, 0x3e2723);
-  const plaqueText = game.add.text(plaqueX, plaqueY, '海辛小龙虾的办公室', {
+  const plaqueText = game.add.text(plaqueX, plaqueY, 'Dangercorn HQ', {
     fontFamily: 'ArkPixel, monospace',
     fontSize: '18px',
     fill: '#ffd700',
@@ -413,20 +445,22 @@ function create() {
     window.catSprite.setFrame(next);
   });
 
-  // === 咖啡机（来自 LAYOUT）===
-  this.anims.create({
-    key: 'coffee_machine',
-    frames: this.anims.generateFrameNumbers('coffee_machine', { start: 0, end: 95 }),
-    frameRate: 12.5,
-    repeat: -1
-  });
-  const coffeeMachine = this.add.sprite(
-    LAYOUT.furniture.coffeeMachine.x,
-    LAYOUT.furniture.coffeeMachine.y,
-    'coffee_machine'
-  ).setOrigin(LAYOUT.furniture.coffeeMachine.origin.x, LAYOUT.furniture.coffeeMachine.origin.y);
-  coffeeMachine.setDepth(LAYOUT.furniture.coffeeMachine.depth);
-  coffeeMachine.anims.play('coffee_machine', true);
+  // === Coffee Machine (from LAYOUT) ===
+  if (game.textures.exists('coffee_machine')) {
+    this.anims.create({
+      key: 'coffee_machine',
+      frames: this.anims.generateFrameNumbers('coffee_machine', { start: 0, end: 95 }),
+      frameRate: 12.5,
+      repeat: -1
+    });
+    const coffeeMachine = this.add.sprite(
+      LAYOUT.furniture.coffeeMachine.x,
+      LAYOUT.furniture.coffeeMachine.y,
+      'coffee_machine'
+    ).setOrigin(LAYOUT.furniture.coffeeMachine.origin.x, LAYOUT.furniture.coffeeMachine.origin.y);
+    coffeeMachine.setDepth(LAYOUT.furniture.coffeeMachine.depth);
+    coffeeMachine.anims.play('coffee_machine', true);
+  }
 
   // === 服务器区（来自 LAYOUT）===
   this.anims.create({
@@ -445,32 +479,36 @@ function create() {
   serverroom.anims.stop();
   serverroom.setFrame(0);
 
-  // === 新办公桌（来自 LAYOUT，强制透明 PNG）===
-  const desk = this.add.image(
-    LAYOUT.furniture.desk.x,
-    LAYOUT.furniture.desk.y,
-    'desk_v2'
-  ).setOrigin(LAYOUT.furniture.desk.origin.x, LAYOUT.furniture.desk.origin.y);
-  desk.setDepth(LAYOUT.furniture.desk.depth);
+  // === Desk (from LAYOUT) ===
+  if (game.textures.exists('desk_v2')) {
+    const desk = this.add.image(
+      LAYOUT.furniture.desk.x,
+      LAYOUT.furniture.desk.y,
+      'desk_v2'
+    ).setOrigin(LAYOUT.furniture.desk.origin.x, LAYOUT.furniture.desk.origin.y);
+    desk.setDepth(LAYOUT.furniture.desk.depth);
+  }
 
-  // === 花盆（来自 LAYOUT）===
-  const flowerFrameCount = 16;
-  const randomFlowerFrame = Math.floor(Math.random() * flowerFrameCount);
-  const flower = this.add.sprite(
-    LAYOUT.furniture.flower.x,
-    LAYOUT.furniture.flower.y,
-    'flowers',
-    randomFlowerFrame
-  ).setOrigin(LAYOUT.furniture.flower.origin.x, LAYOUT.furniture.flower.origin.y);
-  flower.setScale(LAYOUT.furniture.flower.scale || 1);
-  flower.setDepth(LAYOUT.furniture.flower.depth);
-  flower.setInteractive({ useHandCursor: true });
-  window.flowerSprite = flower;
-  window.flowerFrameCount = flowerFrameCount;
-  flower.on('pointerdown', () => {
-    const next = Math.floor(Math.random() * window.flowerFrameCount);
-    window.flowerSprite.setFrame(next);
-  });
+  // === Flowers (from LAYOUT) ===
+  if (game.textures.exists('flowers')) {
+    const flowerFrameCount = 16;
+    const randomFlowerFrame = Math.floor(Math.random() * flowerFrameCount);
+    const flower = this.add.sprite(
+      LAYOUT.furniture.flower.x,
+      LAYOUT.furniture.flower.y,
+      'flowers',
+      randomFlowerFrame
+    ).setOrigin(LAYOUT.furniture.flower.origin.x, LAYOUT.furniture.flower.origin.y);
+    flower.setScale(LAYOUT.furniture.flower.scale || 1);
+    flower.setDepth(LAYOUT.furniture.flower.depth);
+    flower.setInteractive({ useHandCursor: true });
+    window.flowerSprite = flower;
+    window.flowerFrameCount = flowerFrameCount;
+    flower.on('pointerdown', () => {
+      const next = Math.floor(Math.random() * window.flowerFrameCount);
+      window.flowerSprite.setFrame(next);
+    });
+  }
 
   // === Star 在桌前工作（来自 LAYOUT）===
   this.anims.create({
@@ -511,22 +549,24 @@ function create() {
   starWorking.setDepth(LAYOUT.furniture.starWorking.depth);
   window.starWorking = starWorking;
 
-  // === 同步动画（来自 LAYOUT）===
-  this.anims.create({
-    key: 'sync_anim',
-    frames: this.anims.generateFrameNumbers('sync_anim', { start: 1, end: 52 }),
-    frameRate: 12,
-    repeat: -1
-  });
-  syncAnimSprite = this.add.sprite(
-    LAYOUT.furniture.syncAnim.x,
-    LAYOUT.furniture.syncAnim.y,
-    'sync_anim',
-    0
-  ).setOrigin(LAYOUT.furniture.syncAnim.origin.x, LAYOUT.furniture.syncAnim.origin.y);
-  syncAnimSprite.setDepth(LAYOUT.furniture.syncAnim.depth);
-  syncAnimSprite.anims.stop();
-  syncAnimSprite.setFrame(0);
+  // === Sync Animation (from LAYOUT) ===
+  if (game.textures.exists('sync_anim')) {
+    this.anims.create({
+      key: 'sync_anim',
+      frames: this.anims.generateFrameNumbers('sync_anim', { start: 1, end: 52 }),
+      frameRate: 12,
+      repeat: -1
+    });
+    syncAnimSprite = this.add.sprite(
+      LAYOUT.furniture.syncAnim.x,
+      LAYOUT.furniture.syncAnim.y,
+      'sync_anim',
+      0
+    ).setOrigin(LAYOUT.furniture.syncAnim.origin.x, LAYOUT.furniture.syncAnim.origin.y);
+    syncAnimSprite.setDepth(LAYOUT.furniture.syncAnim.depth);
+    syncAnimSprite.anims.stop();
+    syncAnimSprite.setFrame(0);
+  }
 
   window.starSprite = star;
 
@@ -538,7 +578,7 @@ function create() {
   coordsToggle.addEventListener('click', () => {
     showCoords = !showCoords;
     coordsOverlay.style.display = showCoords ? 'block' : 'none';
-    coordsToggle.textContent = showCoords ? '隐藏坐标' : '显示坐标';
+    coordsToggle.textContent = showCoords ? 'Hide Coords' : 'Show Coords';
     coordsToggle.style.background = showCoords ? '#e94560' : '#333';
   });
 
@@ -703,43 +743,69 @@ function fetchStatus() {
         pendingDesiredState = null;
         currentState = nextState;
 
+        // Dangercorn: use Calder sprite for active states
+        var useCalder = game.textures.exists('agent_calder');
+        var calderAnimKey = 'agent_calder_idle';
+
         if (nextState === 'idle') {
-          if (game.textures.exists('sofa_busy')) {
+          if (sofa && game.textures.exists('sofa_busy')) {
             sofa.setTexture('sofa_busy');
             sofa.anims.play('sofa_busy', true);
           }
-          star.setVisible(false);
-          star.anims.stop();
+          if (useCalder) {
+            star.setVisible(true);
+            if (game.anims.exists(calderAnimKey)) star.anims.play(calderAnimKey, true);
+          } else {
+            star.setVisible(false);
+            star.anims.stop();
+          }
           if (window.starWorking) {
             window.starWorking.setVisible(false);
             window.starWorking.anims.stop();
           }
         } else if (nextState === 'error') {
-          sofa.anims.stop();
-          sofa.setTexture('sofa_idle');
-          star.setVisible(false);
-          star.anims.stop();
+          if (sofa) { sofa.anims.stop(); if (game.textures.exists('sofa_idle')) sofa.setTexture('sofa_idle'); }
+          if (useCalder) {
+            star.setVisible(true);
+            if (game.anims.exists(calderAnimKey)) star.anims.play(calderAnimKey, true);
+          } else {
+            star.setVisible(false);
+            star.anims.stop();
+          }
           if (window.starWorking) {
             window.starWorking.setVisible(false);
             window.starWorking.anims.stop();
           }
         } else if (nextState === 'syncing') {
-          sofa.anims.stop();
-          sofa.setTexture('sofa_idle');
-          star.setVisible(false);
-          star.anims.stop();
+          if (sofa) { sofa.anims.stop(); if (game.textures.exists('sofa_idle')) sofa.setTexture('sofa_idle'); }
+          if (useCalder) {
+            star.setVisible(true);
+            if (game.anims.exists(calderAnimKey)) star.anims.play(calderAnimKey, true);
+          } else {
+            star.setVisible(false);
+            star.anims.stop();
+          }
           if (window.starWorking) {
             window.starWorking.setVisible(false);
             window.starWorking.anims.stop();
           }
         } else {
-          sofa.anims.stop();
-          sofa.setTexture('sofa_idle');
-          star.setVisible(false);
-          star.anims.stop();
-          if (window.starWorking) {
-            window.starWorking.setVisible(true);
-            window.starWorking.anims.play('star_working', true);
+          // writing / researching / executing — Calder is active
+          if (sofa) { sofa.anims.stop(); if (game.textures.exists('sofa_idle')) sofa.setTexture('sofa_idle'); }
+          if (useCalder) {
+            star.setVisible(true);
+            if (game.anims.exists(calderAnimKey)) star.anims.play(calderAnimKey, true);
+            if (window.starWorking) {
+              window.starWorking.setVisible(false);
+              window.starWorking.anims.stop();
+            }
+          } else {
+            star.setVisible(false);
+            star.anims.stop();
+            if (window.starWorking) {
+              window.starWorking.setVisible(true);
+              window.starWorking.anims.play('star_working', true);
+            }
           }
         }
 
@@ -771,7 +837,7 @@ function fetchStatus() {
       }
     })
     .catch(error => {
-      typewriterTarget = '连接失败，正在重试...';
+      typewriterTarget = 'Connection failed, retrying...';
       typewriterText = '';
       typewriterIndex = 0;
     });
@@ -806,9 +872,67 @@ function moveStar(time) {
           currentState = pendingDesiredState;
           pendingDesiredState = null;
 
+          var _useCalder = game.textures.exists('agent_calder');
+          var _calderAnim = 'agent_calder_idle';
           if (currentState === 'idle') {
+            if (_useCalder) {
+              star.setVisible(true);
+              if (game.anims.exists(_calderAnim)) star.anims.play(_calderAnim, true);
+            } else {
+              star.setVisible(false);
+              star.anims.stop();
+            }
+            if (window.starWorking) {
+              window.starWorking.setVisible(false);
+              window.starWorking.anims.stop();
+            }
+          } else {
+            if (_useCalder) {
+              star.setVisible(true);
+              if (game.anims.exists(_calderAnim)) star.anims.play(_calderAnim, true);
+              if (window.starWorking) {
+                window.starWorking.setVisible(false);
+                window.starWorking.anims.stop();
+              }
+            } else {
+              star.setVisible(false);
+              star.anims.stop();
+              if (window.starWorking) {
+                window.starWorking.setVisible(true);
+                window.starWorking.anims.play('star_working', true);
+              }
+            }
+          }
+        }
+      }
+    } else {
+      if (pendingDesiredState !== null) {
+        isMoving = false;
+        currentState = pendingDesiredState;
+        pendingDesiredState = null;
+
+        var _useCalder2 = game.textures.exists('agent_calder');
+        var _calderAnim2 = 'agent_calder_idle';
+        if (currentState === 'idle') {
+          if (_useCalder2) {
+            star.setVisible(true);
+            if (game.anims.exists(_calderAnim2)) star.anims.play(_calderAnim2, true);
+          } else {
             star.setVisible(false);
             star.anims.stop();
+          }
+          if (window.starWorking) {
+            window.starWorking.setVisible(false);
+            window.starWorking.anims.stop();
+          }
+          if (sofa && game.textures.exists('sofa_busy')) {
+            sofa.setTexture('sofa_busy');
+            sofa.anims.play('sofa_busy', true);
+          }
+        } else {
+          if (_useCalder2) {
+            star.setVisible(true);
+            if (game.anims.exists(_calderAnim2)) star.anims.play(_calderAnim2, true);
             if (window.starWorking) {
               window.starWorking.setVisible(false);
               window.starWorking.anims.stop();
@@ -821,34 +945,7 @@ function moveStar(time) {
               window.starWorking.anims.play('star_working', true);
             }
           }
-        }
-      }
-    } else {
-      if (pendingDesiredState !== null) {
-        isMoving = false;
-        currentState = pendingDesiredState;
-        pendingDesiredState = null;
-
-        if (currentState === 'idle') {
-          star.setVisible(false);
-          star.anims.stop();
-          if (window.starWorking) {
-            window.starWorking.setVisible(false);
-            window.starWorking.anims.stop();
-          }
-          if (game.textures.exists('sofa_busy')) {
-            sofa.setTexture('sofa_busy');
-            sofa.anims.play('sofa_busy', true);
-          }
-        } else {
-          star.setVisible(false);
-          star.anims.stop();
-          if (window.starWorking) {
-            window.starWorking.setVisible(true);
-            window.starWorking.anims.play('star_working', true);
-          }
-          sofa.anims.stop();
-          sofa.setTexture('sofa_idle');
+          if (sofa) { sofa.anims.stop(); if (game.textures.exists('sofa_idle')) sofa.setTexture('sofa_idle'); }
         }
       }
     }
@@ -886,7 +983,7 @@ function showBubble() {
 function showCatBubble() {
   if (!window.catSprite) return;
   if (window.catBubble) { window.catBubble.destroy(); window.catBubble = null; }
-  const texts = BUBBLE_TEXTS.cat || ['喵~', '咕噜咕噜…'];
+  const texts = BUBBLE_TEXTS.cat || ['Meow~', 'Purrrr...'];
   const text = texts[Math.floor(Math.random() * texts.length)];
   const anchorX = window.catSprite.x;
   const anchorY = window.catSprite.y - 60;
@@ -921,7 +1018,7 @@ function fetchAgents() {
       }
     })
     .catch(error => {
-      console.error('拉取 agents 失败:', error);
+      console.error('Failed to fetch agents:', error);
     });
 }
 
@@ -954,20 +1051,46 @@ function renderAgent(agent) {
   if (authStatus === 'rejected') alpha = 0.4;
   if (authStatus === 'offline') alpha = 0.5;
 
+  // === Dangercorn custom sprite mapping ===
+  var AGENT_SPRITE_MAP = {
+    'calder': 'agent_calder',
+    'johnny-5': 'agent_johnny5',
+    'johnny5': 'agent_johnny5',
+    'hollywood': 'agent_hollywood',
+    'njord': 'agent_njord'
+  };
+
   if (!agents[agentId]) {
     // 新建 agent
     const container = game.add.container(baseX, baseY);
-    container.setDepth(1200 + (isMain ? 100 : 0)); // 放到最顶层！
+    container.setDepth(1200 + (isMain ? 100 : 0));
 
-    // 像素小人：用星星图标，更明显
-    const starIcon = game.add.text(0, 0, '⭐', {
-      fontFamily: 'ArkPixel, monospace',
-      fontSize: '32px'
-    }).setOrigin(0.5);
-    starIcon.name = 'starIcon';
+    // Check for custom Dangercorn sprite
+    var spriteKey = AGENT_SPRITE_MAP[(name || '').toLowerCase()];
+    var hasCustomSprite = spriteKey && game.textures.exists(spriteKey);
+
+    if (hasCustomSprite) {
+      // Use custom animated sprite for Dangercorn agents
+      var agentSprite = game.add.sprite(0, 0, spriteKey);
+      agentSprite.setScale(0.5); // 128px sprites scaled to 64px in office
+      agentSprite.setOrigin(0.5);
+      agentSprite.name = 'agentSprite';
+      if (game.anims.exists(spriteKey + '_idle')) {
+        agentSprite.anims.play(spriteKey + '_idle', true);
+      }
+      container.add([agentSprite]);
+    } else {
+      // Default star emoji for unknown agents
+      var starIcon = game.add.text(0, 0, '\u2b50', {
+        fontFamily: 'ArkPixel, monospace',
+        fontSize: '32px'
+      }).setOrigin(0.5);
+      starIcon.name = 'starIcon';
+      container.add([starIcon]);
+    }
 
     // 名字标签（漂浮）
-    const nameTag = game.add.text(0, -36, name, {
+    const nameTag = game.add.text(0, hasCustomSprite ? -42 : -36, name, {
       fontFamily: 'ArkPixel, monospace',
       fontSize: '14px',
       fill: '#' + nameColor.toString(16).padStart(6, '0'),
@@ -977,17 +1100,17 @@ function renderAgent(agent) {
     }).setOrigin(0.5);
     nameTag.name = 'nameTag';
 
-    // 状态小点（绿色/黄色/红色）
+    // 状態小点
     let dotColor = 0x64748b;
     if (authStatus === 'approved') dotColor = 0x22c55e;
     if (authStatus === 'pending') dotColor = 0xf59e0b;
     if (authStatus === 'rejected') dotColor = 0xef4444;
     if (authStatus === 'offline') dotColor = 0x94a3b8;
-    const statusDot = game.add.circle(20, -20, 5, dotColor, alpha);
+    const statusDot = game.add.circle(hasCustomSprite ? 30 : 20, hasCustomSprite ? -30 : -20, 5, dotColor, alpha);
     statusDot.setStrokeStyle(2, 0x000000, alpha);
     statusDot.name = 'statusDot';
 
-    container.add([starIcon, statusDot, nameTag]);
+    container.add([statusDot, nameTag]);
     agents[agentId] = container;
   } else {
     // 更新 agent

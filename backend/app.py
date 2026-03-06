@@ -281,7 +281,7 @@ DEFAULT_AGENTS = [
         "name": "Star",
         "isMain": True,
         "state": "idle",
-        "detail": "待命中，随时准备为你服务",
+        "detail": "Standing by, ready to serve",
         "updated_at": datetime.now().isoformat(),
         "area": "breakroom",
         "source": "local",
